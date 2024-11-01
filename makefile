@@ -8,15 +8,15 @@ run:
 # ==============================================================================
 # Define dependencies
 
-GOLANG          := golang:1.22
-ALPINE          := alpine:3.19
-KIND            := kindest/node:v1.29.2
-POSTGRES        := postgres:16.2
-GRAFANA         := grafana/grafana:10.4.0
-PROMETHEUS      := prom/prometheus:v2.51.0
-TEMPO           := grafana/tempo:2.4.0
-LOKI            := grafana/loki:2.9.0
-PROMTAIL        := grafana/promtail:2.9.0
+GOLANG          := golang:1.23
+ALPINE          := alpine:3.20
+KIND            := kindest/node:v1.31.0
+POSTGRES        := postgres:16.4
+GRAFANA         := grafana/grafana:11.1.0
+PROMETHEUS      := prom/prometheus:v2.54.0
+TEMPO           := grafana/tempo:2.5.0
+LOKI            := grafana/loki:3.1.0
+PROMTAIL        := grafana/promtail:3.1.0
 
 KIND_CLUSTER    := evis-starter-cluster
 NAMESPACE       := sales-system
@@ -27,6 +27,19 @@ VERSION         := 0.0.1
 SALES_IMAGE     := $(BASE_IMAGE_NAME)/$(SALES_APP):$(VERSION)
 METRICS_IMAGE   := $(BASE_IMAGE_NAME)/metrics:$(VERSION)
 AUTH_IMAGE      := $(BASE_IMAGE_NAME)/$(AUTH_APP):$(VERSION)
+
+# ==============================================================================
+# Building containers
+
+build: sales
+
+sales:
+	docker build \
+		-f zarf/docker/dockerfile.sales \
+		-t $(SALES_IMAGE) \
+		--build-arg BUILD_REF=$(VERSION) \
+		--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+		.
 
 # ==============================================================================
 # Running from within k8s/kind
