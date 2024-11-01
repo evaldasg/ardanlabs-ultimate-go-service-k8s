@@ -26,7 +26,6 @@ $RECYCLE.BIN/
 # Go workspace
 bin/
 pkg/
-vendor/
 
 # Go modules
 go.sum
