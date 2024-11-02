@@ -3,13 +3,15 @@ package mid
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/logger"
+	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/web"
 )
 
 // Logger writes information about the request to the logs.
 func Logger(ctx context.Context, log *logger.Logger, path string, rawQuery string, method string, remoteAddr string, handler Handler) error {
-	// v := web.GetValues(ctx)
+	v := web.GetValues(ctx)
 
 	if rawQuery != "" {
 		path = fmt.Sprintf("%s?%s", path, rawQuery)
@@ -19,8 +21,8 @@ func Logger(ctx context.Context, log *logger.Logger, path string, rawQuery strin
 
 	err := handler(ctx)
 
-	log.Info(ctx, "request completed", "method", method, "path", path, "remoteaddr", remoteAddr) //,
-	// "statuscode", v.StatusCode, "since", time.Since(v.Now).String())
+	log.Info(ctx, "request completed", "method", method, "path", path, "remoteaddr", remoteAddr,
+		"statuscode", v.StatusCode, "since", time.Since(v.Now).String())
 
 	return err
 }
