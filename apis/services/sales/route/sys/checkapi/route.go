@@ -1,8 +1,8 @@
 package checkapi
 
-import "net/http"
+import "github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/web"
 
-func Routes(mux *http.ServeMux) {
-	mux.HandleFunc("GET /liveness", liveness)
-	mux.HandleFunc("GET /readiness", readiness)
+func Routes(app *web.App) {
+	app.HandleFunc("GET /liveness", liveness)
+	app.HandleFunc("GET /readiness", readiness)
 }
