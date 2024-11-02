@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/app/api/mid"
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/web"
 )
 
