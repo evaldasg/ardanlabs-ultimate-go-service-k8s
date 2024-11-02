@@ -6,12 +6,14 @@ import (
 	"os"
 
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/apis/services/sales/route/sys/checkapi"
+	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/app/api/mid"
+	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/logger"
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/web"
 )
 
 // WebAPIAuth constructs a http.Handler with all application routes bound.
-func WebAPI(shutdown chan os.Signal) *web.App {
-	mux := web.NewApp(shutdown)
+func WebAPI(log *logger.Logger, shutdown chan os.Signal) *web.App {
+	mux := web.NewApp(shutdown, mid.Logger(log))
 
 	checkapi.Routes(mux)
 
