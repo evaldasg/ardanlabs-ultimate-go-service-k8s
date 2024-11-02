@@ -5,8 +5,8 @@ package mux
 import (
 	"os"
 
+	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/apis/services/api/mid"
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/apis/services/sales/route/sys/checkapi"
-	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/app/api/mid"
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/logger"
 	"github.com/evaldasg/ardanlabs-ultimate-go-service-k8s/foundation/web"
 )
