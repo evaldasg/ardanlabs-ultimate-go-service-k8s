@@ -2,6 +2,14 @@
 SHELL_PATH = /bin/ash
 SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 
+# RSA Keys
+# 	To generate a private/public key PEM file.
+# 	$ openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+# 	$ openssl rsa -pubout -in private.pem -out public.pem
+
+# ==============================================================================
+# services runners
+
 run:
 	go run apis/services/sales/main.go | go run apis/tooling/logfmt/main.go
 
@@ -10,6 +18,12 @@ help:
 
 version:
 	go run apis/services/sales/main.go --version
+
+admin:
+	go run apis/tooling/admin/main.go
+
+# ==============================================================================
+# testing and debugging endpoints
 
 curl-test:
 	curl -il -X GET http://localhost:3000/test
@@ -27,7 +41,7 @@ curl-panic:
 	curl -il -X GET http://localhost:3000/testpanic
 
 # ==============================================================================
-# Define dependencies
+# define dependencies
 
 GOLANG          := golang:1.23
 ALPINE          := alpine:3.20
